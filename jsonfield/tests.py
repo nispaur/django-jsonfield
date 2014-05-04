@@ -3,7 +3,11 @@ from django.core.serializers import deserialize, serialize
 from django.core.serializers.base import DeserializationError
 from django.db import models
 from django.test import TestCase
-from django.utils import simplejson as json
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    # Django >= 1.5 has deprecated simplejson
+    from django.utils import json
 
 from .fields import JSONField, JSONCharField
 from django.forms.util import ValidationError
